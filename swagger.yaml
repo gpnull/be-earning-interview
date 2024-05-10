@@ -1,0 +1,48 @@
+swagger: "2.0"
+info:
+  title: Attendance Tracker API
+  version: 1.0.0
+host: "api.yourdomain.com"
+basePath: "/api"
+schemes:
+  - https
+paths:
+  /attendance:
+    post:
+      summary: Record attendance
+      description: Records an attendance event for an employee.
+      parameters:
+        - in: body
+          name: attendance
+          description: Attendance data
+          required: true
+          schema:
+            $ref: "#/definitions/Attendance"
+      responses:
+        200:
+          description: Attendance recorded successfully
+          schema:
+            $ref: "#/definitions/Response"
+definitions:
+  Attendance:
+    type: object
+    required:
+      - employeeId
+      - checkInTime
+      - details
+    properties:
+      employeeId:
+        type: integer
+        format: int64
+      checkInTime:
+        type: integer
+        format: int64
+      details:
+        type: string
+  Response:
+    type: object
+    properties:
+      message:
+        type: string
+      txHash:
+        type: string
